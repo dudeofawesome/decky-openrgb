@@ -1,5 +1,13 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+{
+  # https://devenv.sh/outputs/
+  outputs.decky-openrgb = (import ./packages/decky-openrgb/package.nix { inherit lib pkgs config; });
+
   packages = with pkgs; [
     docker
     gcc

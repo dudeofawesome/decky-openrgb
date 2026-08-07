@@ -83,6 +83,16 @@ is complete only when its associated automated tests pass.
 - [x] Run the complete automated suite and confirm every acceptance criterion
   above has a passing test before marking implementation complete.
 
+## 6. Distribution
+
+- [x] Add a reproducible devenv output that builds the frontend from the pnpm
+  lockfile and creates a versioned Decky plugin ZIP. (`DIST-001`)
+- [x] Package the runtime frontend, Python backend, metadata, documentation,
+  assets, and defaults beneath one plugin root while excluding development
+  files. (`DIST-002`, `DIST-003`)
+- [x] Validate the generated archive layout as part of the Nix build.
+  (`DIST-002`, `DIST-003`)
+
 ## Out of scope for v1
 
 - Installing, bundling, launching as a persistent service, or upgrading OpenRGB.
