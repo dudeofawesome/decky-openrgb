@@ -40,8 +40,9 @@ is complete only when its associated automated tests pass.
   (`AUTO-005`, `AUTO-009`)
 - [x] Serialize all apply attempts, coalesce overlapping resume sequences, and
   cancel pending retries on unload. (`AUTO-006`, `AUTO-007`, `AUTO-008`)
-- [x] Register the Steam resume callback in the frontend, call the backend, and
-  unregister it and the settings route on dismount. (`AUTO-004`, `UI-007`)
+- [x] Register the Steam resume callback in the frontend when supported, call
+  the backend, and unregister it and the settings route on dismount; keep the
+  plugin usable when the callback API is absent. (`AUTO-004`, `UI-007`)
 
 ## 4. Frontend
 
@@ -74,7 +75,8 @@ is complete only when its associated automated tests pass.
   `APPLY-005`, `APPLY-006`, `APPLY-007`, `APPLY-008`, `APPLY-009`)
 - [x] Test automation with controlled clocks and fake processes: disabled
   triggers, startup, resume registration cleanup, retry timing and exhaustion,
-  early success, serialization, coalescing, unload, and final-result publishing.
+  unsupported resume APIs, early success, serialization, coalescing, unload,
+  and final-result publishing.
   (`AUTO-001`, `AUTO-002`, `AUTO-003`, `AUTO-004`, `AUTO-005`, `AUTO-006`,
   `AUTO-007`, `AUTO-008`, `AUTO-009`)
 - [x] Test frontend loading, ready, applying, empty and error rendering; control

@@ -61,4 +61,20 @@ describe("Decky lifecycle", () => {
     expect(mocks.unregister).toHaveBeenCalledOnce();
     expect(mocks.removeRoute).toHaveBeenCalledWith("/decky-openrgb/settings");
   });
+
+  it("loads and dismounts when Steam has no resume callback API", async () => {
+    Object.assign(globalThis, { SteamClient: { System: {} } });
+    vi.resetModules();
+    const { default: createPlugin } = await import("./index");
+    const plugin = createPlugin();
+
+    expect(mocks.addRoute).toHaveBeenCalledOnce();
+    expect(mocks.initialize).toHaveBeenCalledOnce();
+    expect(mocks.registerResume).not.toHaveBeenCalled();
+
+    expect(() => plugin.onDismount?.()).not.toThrow();
+    expect(mocks.shutdown).toHaveBeenCalledOnce();
+    expect(mocks.unregister).not.toHaveBeenCalled();
+    expect(mocks.removeRoute).toHaveBeenCalledWith("/decky-openrgb/settings");
+  });
 });

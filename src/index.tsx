@@ -7,8 +7,13 @@ import { controller } from "./model";
 
 export default definePlugin(() => {
   routerHook.addRoute(SETTINGS_ROUTE, SettingsPage, { exact: true });
-  const resumeRegistration = SteamClient.System.RegisterForOnResumeFromSuspend(
-    () => void controller.resume(),
+  const system = SteamClient.System as unknown as {
+    RegisterForOnResumeFromSuspend?: (
+      callback: () => void,
+    ) => { unregister(): void };
+  };
+  const resumeRegistration = system.RegisterForOnResumeFromSuspend?.(() =>
+    void controller.resume(),
   );
   void controller.initialize();
 
@@ -19,7 +24,7 @@ export default definePlugin(() => {
     icon: <FaLightbulb />,
     onDismount() {
       controller.shutdown();
-      resumeRegistration.unregister();
+      resumeRegistration?.unregister();
       routerHook.removeRoute(SETTINGS_ROUTE);
     },
   };

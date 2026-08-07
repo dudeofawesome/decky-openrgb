@@ -16,9 +16,11 @@ backend starts and when Steam resumes from suspend.
 4. After loading settings and scanning profiles during backend startup, begin an
    automatic startup application only when automation remains enabled and the
    selection remains available.
-5. The frontend registers Steam's resume-from-suspend callback during plugin
-   initialization. On resume it asks the backend to apply only when automation
-   is enabled. The callback is unregistered when the plugin dismounts.
+5. When Steam exposes a resume-from-suspend callback API, the frontend registers
+   it during plugin initialization. On resume it asks the backend to apply only
+   when automation is enabled, and the callback is unregistered when the plugin
+   dismounts. When the API is unavailable, the frontend must still load and all
+   functionality except the resume trigger remains available.
 6. An automatic sequence attempts immediately. After a failed attempt, retry at
    five-second intervals up to three additional times, for at most four
    attempts total. Stop immediately after the first success.
@@ -41,8 +43,9 @@ backend starts and when Steam resumes from suspend.
 - **AUTO-002:** With automation off, startup and resume launch no process.
 - **AUTO-003:** With automation on, backend startup launches an automatic
   sequence after settings load and profile discovery; no systemd unit is used.
-- **AUTO-004:** The frontend registers one resume callback, invokes the backend
-  from it, and unregisters the callback on dismount.
+- **AUTO-004:** When supported, the frontend registers one resume callback,
+  invokes the backend from it, and unregisters the callback on dismount. When
+  unsupported, plugin initialization and dismount complete without error.
 - **AUTO-005:** An initial success performs one attempt; repeated failures
   perform four attempts at five-second intervals; an intermediate success stops
   further retries.
