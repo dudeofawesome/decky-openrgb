@@ -97,6 +97,9 @@ is complete only when its associated automated tests pass.
 - [x] Resolve backend modules relative to the file-loaded Decky entrypoint and
   cover loading when the plugin root is absent from Python's initial module
   search path. (`DIST-004`)
+- [x] Export the unpacked plugin derivation as both the named and default root
+  flake package for consumption by other flakes and NixOS configurations.
+  (`DIST-005`)
 
 ## 7. Developer skills
 

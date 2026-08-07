@@ -6,7 +6,10 @@
 }:
 {
   # https://devenv.sh/outputs/
-  outputs.decky-openrgb = (import ./packages/decky-openrgb/package.nix { inherit lib pkgs config; });
+  outputs.decky-openrgb = import ./packages/decky-openrgb/package.nix {
+    inherit lib pkgs;
+    nodejs = config.languages.javascript.package;
+  };
 
   packages = with pkgs; [
     docker

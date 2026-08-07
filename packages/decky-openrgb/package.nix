@@ -1,8 +1,7 @@
 {
   lib,
   pkgs,
-  config,
-  ...
+  nodejs,
 }:
 let
   manifest = builtins.fromJSON (builtins.readFile ../../package.json);
@@ -39,7 +38,7 @@ pkgs.stdenvNoCC.mkDerivation {
   };
 
   nativeBuildInputs = [
-    config.languages.javascript.package
+    nodejs
     pkgs.pnpm
     pkgs.pnpmConfigHook
   ];

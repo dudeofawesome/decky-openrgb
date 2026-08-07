@@ -2,9 +2,10 @@
 
 ## Purpose
 
-The project exposes a reproducible devenv build output that can be distributed
-to and installed by Decky Loader without requiring a local checkout or
-pre-built frontend files.
+The project exposes reproducible devenv and standard Nix flake package outputs
+that can be distributed to and installed by Decky Loader without requiring a
+local checkout or pre-built frontend files. The flake output can also be used
+as an input while building a NixOS system.
 
 ## Requirements
 
@@ -20,6 +21,9 @@ pre-built frontend files.
    relative to `main.py` when Decky loads the entrypoint directly, without
    relying on the plugin directory being the process working directory or
    already present on Python's module search path.
+6. The root flake must expose the same unpacked plugin derivation as
+   `packages.<system>.decky-openrgb` and as the default package so another
+   flake can consume it without importing project-internal Nix files.
 
 ## Acceptance Criteria
 
@@ -32,3 +36,6 @@ pre-built frontend files.
   Nix development configuration.
 - **DIST-004:** Loading the packaged `main.py` by file path succeeds when the
   plugin root is absent from Python's initial module search path.
+- **DIST-005:** `nix build .#decky-openrgb` and `nix build .` select the plugin
+  package, and evaluating the root flake exposes both package attributes for
+  supported Linux NixOS systems.
