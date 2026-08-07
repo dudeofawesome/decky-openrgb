@@ -9,7 +9,7 @@ fields:
 | --- | --- | --- | --- |
 | `selected_profile` | string or null | null | Exact profile identifier |
 | `automatic_apply` | boolean | false | Apply on backend startup and resume |
-| `executable_override` | string | empty | Absolute executable path; empty uses `OpenRGB` from `PATH` |
+| `executable_override` | string | empty | Absolute executable path; empty uses `openrgb` from `PATH` |
 | `profiles_directory_override` | string | empty | Absolute directory; empty uses the Deck user default |
 | `remote_enabled` | boolean | false | Add the OpenRGB `--client` argument |
 | `server_address` | string | empty | Remote host or host and port |

@@ -150,7 +150,7 @@ class BackendTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertFalse(state["settings"]["automatic_apply"])
         self.assertEqual(state["profiles"][0]["identifier"], "System.ORP")
         self.assertEqual(self.store.load().settings, PersistedSettings())
-        self.assertEqual(state["resolved_executable"], "OpenRGB")
+        self.assertEqual(state["resolved_executable"], "openrgb")
         self.assertEqual(
             state["resolved_profiles_directory"], str(self.profiles)
         )
@@ -217,7 +217,7 @@ class BackendTestCase(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(
             local_factory.calls[0][0],
             (
-                "OpenRGB",
+                "openrgb",
                 "--config",
                 str(self.profiles),
                 "--profile",

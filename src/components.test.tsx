@@ -152,7 +152,7 @@ const readyView = (): ViewState => ({
       remote_enabled: false,
       server_address: "",
     },
-    resolved_executable: "OpenRGB",
+    resolved_executable: "openrgb",
     resolved_profiles_directory: "/home/deck/.config/OpenRGB",
     profiles: [{ identifier: "Blue.orp", display_name: "Blue" }],
     discovery_error: null,

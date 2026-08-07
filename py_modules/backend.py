@@ -18,6 +18,7 @@ from .discovery import (
 from .models import (
     ApplyResult,
     ApplyTrigger,
+    DEFAULT_EXECUTABLE,
     LastApplied,
     PersistedSettings,
     PluginState,
@@ -173,7 +174,7 @@ class OpenRGBBackend:
         )
         return replace(
             self._state,
-            resolved_executable=settings.executable_override or "OpenRGB",
+            resolved_executable=settings.executable_override or DEFAULT_EXECUTABLE,
             resolved_profiles_directory=str(resolved_directory),
         )
 
@@ -407,7 +408,7 @@ class OpenRGBBackend:
 
     def _build_arguments(self, selected: str) -> list[str]:
         settings = self._state.settings
-        arguments = [settings.executable_override or "OpenRGB"]
+        arguments = [settings.executable_override or DEFAULT_EXECUTABLE]
         if settings.remote_enabled:
             arguments.extend(["--client", settings.server_address])
         directory = resolve_profiles_directory(

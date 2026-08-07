@@ -204,7 +204,7 @@ export function SettingsPage() {
         <PanelSectionRow>
           <TextField
             label="Executable override"
-            description="Absolute path, or leave empty to resolve OpenRGB through PATH."
+            description="Absolute path, or leave empty to resolve openrgb through PATH."
             value={draft.executable_override}
             disabled={view.busy === "saving"}
             onChange={(event) =>

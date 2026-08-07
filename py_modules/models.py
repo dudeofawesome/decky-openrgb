@@ -7,6 +7,9 @@ from enum import Enum
 from typing import Any, Mapping
 
 
+DEFAULT_EXECUTABLE = "openrgb"
+
+
 class ApplyTrigger(str, Enum):
     """The action that requested an OpenRGB application."""
 
@@ -103,7 +106,7 @@ class LastApplied:
 @dataclass(frozen=True, slots=True)
 class PluginState:
     settings: PersistedSettings = field(default_factory=PersistedSettings)
-    resolved_executable: str = "OpenRGB"
+    resolved_executable: str = DEFAULT_EXECUTABLE
     resolved_profiles_directory: str = ""
     profiles: tuple[ProfileSummary, ...] = ()
     discovery_error: str | None = None

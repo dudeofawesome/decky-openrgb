@@ -23,7 +23,7 @@ For remote mode, the effective command is:
 <executable> --client <server-address> --config <profiles-directory> --profile <profile-identifier>
 ```
 
-- `<executable>` is `OpenRGB` when the executable override is empty; otherwise
+- `<executable>` is `openrgb` when the executable override is empty; otherwise
   it is the saved absolute override.
 - `<profiles-directory>` is the resolved configured profiles directory.
 - `<profile-identifier>` is the selected exact filename, not its display name
