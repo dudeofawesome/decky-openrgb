@@ -5,13 +5,14 @@ is complete only when its associated automated tests pass.
 
 ## 1. Backend foundations
 
-- [ ] Define persisted settings, profile summaries, plugin state, apply results,
+- [x] Define persisted settings, profile summaries, plugin state, apply results,
   and trigger types. Implement safe default loading and atomic persistence.
-  (`UI-001`, `UI-002`)
+  (`ARCH-002`, `UI-001`, `UI-002`)
 - [ ] Implement immediate, case-insensitive, non-recursive profile discovery,
-  deterministic sorting, resolved default paths, and discovery errors.
+  deterministic sorting, resolved default paths, the always-searched
+  `/var/lib/OpenRGB` system path, and discovery errors.
   (`DISC-001`, `DISC-002`, `DISC-003`, `DISC-004`, `DISC-005`, `DISC-006`,
-  `DISC-007`)
+  `DISC-007`, `DISC-009`)
 - [ ] Reconcile selection after every successful scan and atomically clear a
   stale selection and automation setting. (`DISC-008`, `AUTO-001`)
 - [ ] Expose state, refresh, selection, and automation backend operations with
@@ -59,10 +60,10 @@ is complete only when its associated automated tests pass.
 ## 5. Automated tests
 
 - [ ] Test discovery with temporary directories: extension filtering, nested
-  files, ordering, exact identifiers, default path resolution, empty/error
-  paths, refresh triggers, and stale-selection reconciliation. (`DISC-001`,
-  `DISC-002`, `DISC-003`, `DISC-004`, `DISC-005`, `DISC-006`, `DISC-007`,
-  `DISC-008`)
+  files, ordering, exact identifiers, default and system path resolution,
+  empty/error paths, refresh triggers, and stale-selection reconciliation.
+  (`DISC-001`, `DISC-002`, `DISC-003`, `DISC-004`, `DISC-005`, `DISC-006`,
+  `DISC-007`, `DISC-008`, `DISC-009`)
 - [ ] Test settings defaults, malformed storage, round trips, validation,
   atomic Save, immediate main-control persistence, and rescan behavior.
   (`UI-001` through `UI-004`, `UI-006`)

@@ -10,6 +10,8 @@ outside this feature.
 
 - The **configured profiles directory** is the saved directory override, or
   `<deck-user-home>/.config/OpenRGB` when the override is empty.
+- The **system profiles directory** is always `/var/lib/OpenRGB`, regardless of
+  the configured profiles directory.
 - A **profile identifier** is the exact filename, including its `.orp`
   extension and original capitalization.
 - A **profile display name** is the profile identifier with its final `.orp`
@@ -19,7 +21,9 @@ outside this feature.
 
 1. Resolve the default directory from Decky's user-home value, not from the
    backend process's user or `~` expansion.
-2. Scan only the immediate children of the configured profiles directory.
+2. Scan the immediate children of both the configured profiles directory and
+   the system profiles directory. If both resolve to the same directory, scan
+   it only once.
 3. Include directory entries that are files and whose final extension equals
    `.orp` case-insensitively. Do not inspect file contents to determine whether
    an entry is a profile.
@@ -55,3 +59,6 @@ outside this feature.
   discovery error.
 - **DISC-008:** A missing saved selection is cleared, automation is disabled,
   and both changes are persisted; an available selection is preserved.
+- **DISC-009:** Profiles are always searched for in `/var/lib/OpenRGB` in
+  addition to the configured profiles directory, without scanning the same
+  directory twice when both paths are equal.

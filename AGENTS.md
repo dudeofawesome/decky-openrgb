@@ -27,4 +27,4 @@ Run non-basic commands from inside the devenv (`devenv shell --quiet -- {command
 
 ## Architecture
 
-check specs/architecture.md
+specified in specs/architecture.md
