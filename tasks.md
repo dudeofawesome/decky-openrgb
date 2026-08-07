@@ -99,6 +99,10 @@ is complete only when its associated automated tests pass.
   newest Decky OpenRGB plugin log from `olympus` without modifying the remote
   host.
   (`LOG-SKILL-001`, `LOG-SKILL-002`, `LOG-SKILL-003`)
+- [x] Add and validate a script-backed project-local skill for building and
+  deploying the in-development plugin to `olympus`.
+  (`DEPLOY-SKILL-001`, `DEPLOY-SKILL-002`, `DEPLOY-SKILL-003`,
+  `DEPLOY-SKILL-004`)
 
 ## Out of scope for v1
 

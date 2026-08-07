@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deploy In-Dev Plugin"
+  short_description: "Build and deploy the development plugin"
+  default_prompt: "Use $deploy-in-dev-plugin to build and deploy the current Decky OpenRGB plugin to olympus."
