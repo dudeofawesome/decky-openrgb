@@ -93,6 +93,13 @@ is complete only when its associated automated tests pass.
 - [x] Validate the generated output layout as part of the Nix build.
   (`DIST-002`, `DIST-003`)
 
+## 7. Developer skills
+
+- [x] Add and validate a script-backed project-local skill for retrieving the
+  newest Decky OpenRGB plugin log from `olympus` without modifying the remote
+  host.
+  (`LOG-SKILL-001`, `LOG-SKILL-002`, `LOG-SKILL-003`)
+
 ## Out of scope for v1
 
 - Installing, bundling, launching as a persistent service, or upgrading OpenRGB.

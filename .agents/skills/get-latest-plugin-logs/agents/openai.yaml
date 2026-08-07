@@ -1,0 +1,4 @@
+interface:
+  display_name: "Get Latest Plugin Logs"
+  short_description: "Fetch the newest Decky OpenRGB plugin log"
+  default_prompt: "Use $get-latest-plugin-logs to fetch and inspect the newest Decky OpenRGB plugin log."
