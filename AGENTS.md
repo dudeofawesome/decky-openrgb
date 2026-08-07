@@ -12,7 +12,7 @@ Run non-basic commands from inside the devenv (`devenv shell --quiet -- {command
 1. Read the specs in the /specs directory
 2. Generate tasks.md if it does not exist
 3. Implement based on the tasks
-4. Create automated tests
+4. Create automated tests where relevant
 5. Ensure all acceptance criteria pass
 
 ## Testing

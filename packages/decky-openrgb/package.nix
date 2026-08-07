@@ -42,8 +42,6 @@ pkgs.stdenvNoCC.mkDerivation {
     config.languages.javascript.package
     pkgs.pnpm
     pkgs.pnpmConfigHook
-    pkgs.unzip
-    pkgs.zip
   ];
 
   buildPhase = ''
@@ -55,17 +53,10 @@ pkgs.stdenvNoCC.mkDerivation {
   installPhase = ''
     runHook preInstall
 
-    pluginRoot="$TMPDIR/${pname}"
-    mkdir -p "$pluginRoot" "$out"
-    cp -R dist py_modules assets "$pluginRoot/"
-    cp LICENSE README.md main.py package.json plugin.json "$pluginRoot/"
-    cp -R defaults/. "$pluginRoot/"
-
-    find "$pluginRoot" -exec touch -h -d '@1' {} +
-    (
-      cd "$TMPDIR"
-      zip -X -q -r "$out/${pname}-${version}.zip" "$pname"
-    )
+    mkdir -p "$out"
+    cp -R dist py_modules assets "$out/"
+    cp LICENSE README.md main.py package.json plugin.json "$out/"
+    cp -R defaults/. "$out/"
 
     runHook postInstall
   '';
@@ -74,32 +65,34 @@ pkgs.stdenvNoCC.mkDerivation {
   installCheckPhase = ''
     runHook preInstallCheck
 
-    archive="$out/${pname}-${version}.zip"
-    entries="$(mktemp)"
-    unzip -Z1 "$archive" > "$entries"
-
     for required in \
-      "${pname}/dist/index.js" \
-      "${pname}/main.py" \
-      "${pname}/py_modules/backend.py" \
-      "${pname}/package.json" \
-      "${pname}/plugin.json" \
-      "${pname}/LICENSE"
+      "dist/index.js" \
+      "main.py" \
+      "py_modules/backend.py" \
+      "package.json" \
+      "plugin.json" \
+      "LICENSE"
     do
-      grep -Fxq "$required" "$entries"
+      test -f "$out/$required"
     done
 
-    if grep -Evq "^${pname}(/|$)" "$entries"
+    test ! -e "$out/.devenv"
+    test ! -e "$out/devenv.nix"
+
+    if find "$out" -type d \( \
+      -name src -o \
+      -name tests -o \
+      -name node_modules -o \
+      -name __pycache__ \
+    \) -print -quit | grep -q .
     then
-      echo "distribution contains more than one top-level path" >&2
+      echo "distribution contains development-only directories" >&2
       exit 1
     fi
 
-    if grep -Eq \
-      "(^|/)(src|tests|node_modules|__pycache__)(/|$)|^${pname}/(\.devenv|devenv\.nix)" \
-      "$entries"
+    if find "$out" -type f -name '*.zip' -print -quit | grep -q .
     then
-      echo "distribution contains development-only files" >&2
+      echo "distribution contains a ZIP archive" >&2
       exit 1
     fi
 

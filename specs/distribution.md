@@ -8,22 +8,27 @@ pre-built frontend files.
 
 ## Requirements
 
-1. `devenv build outputs.plugin` builds the frontend from the locked pnpm
-   dependencies and produces a versioned ZIP archive.
-2. The archive contains one top-level `decky-openrgb` directory with the built
-   frontend, Python backend, metadata, license, readme, assets, and the contents
-   of `defaults`.
+1. `devenv build outputs.decky-openrgb` builds the frontend from the locked pnpm
+   dependencies and produces an unpacked Decky plugin directory.
+2. The output directory contains the built frontend, Python backend, metadata,
+   license, readme, assets, and the contents of `defaults` directly, without a
+   ZIP archive or an additional top-level directory.
 3. Development-only inputs, tests, and frontend source files are excluded from
-   the archive.
-4. The build validates the archive layout before publishing the output.
+   the output directory.
+4. The build validates the output layout before publishing it.
+5. The Python entrypoint must resolve the packaged `py_modules` directory
+   relative to `main.py` when Decky loads the entrypoint directly, without
+   relying on the plugin directory being the process working directory or
+   already present on Python's module search path.
 
 ## Acceptance Criteria
 
-- **DIST-001:** Building `outputs.plugin` from a clean source produces
-  `decky-openrgb-<package-version>.zip` without relying on a checked-in `dist`
-  directory.
-- **DIST-002:** The ZIP has the required Decky runtime files beneath its single
-  `decky-openrgb` root, including `dist/index.js`, `main.py`, `py_modules`,
-  `package.json`, `plugin.json`, and `LICENSE`.
-- **DIST-003:** The ZIP excludes `src`, tests, dependency directories, and Nix
-  development configuration.
+- **DIST-001:** Building `outputs.decky-openrgb` from a clean source produces an
+  unpacked plugin directory without relying on a checked-in `dist` directory.
+- **DIST-002:** The output root contains the required Decky runtime files,
+  including `dist/index.js`, `main.py`, `py_modules`, `package.json`,
+  `plugin.json`, and `LICENSE`, and does not contain a ZIP archive.
+- **DIST-003:** The output excludes `src`, tests, dependency directories, and
+  Nix development configuration.
+- **DIST-004:** Loading the packaged `main.py` by file path succeeds when the
+  plugin root is absent from Python's initial module search path.
