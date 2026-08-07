@@ -1,4 +1,11 @@
 import os
+import sys
+
+# Decky loads this entrypoint directly from its file path. That does not
+# guarantee the containing plugin directory is on Python's module search path.
+plugin_root = os.path.dirname(os.path.abspath(__file__))
+if plugin_root not in sys.path:
+    sys.path.insert(0, plugin_root)
 
 # The decky plugin module is located at decky-loader/plugin
 # For easy intellisense checkout the decky-loader code repo

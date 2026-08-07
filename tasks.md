@@ -92,6 +92,9 @@ is complete only when its associated automated tests pass.
   development files. (`DIST-002`, `DIST-003`)
 - [x] Validate the generated output layout as part of the Nix build.
   (`DIST-002`, `DIST-003`)
+- [x] Resolve backend modules relative to the file-loaded Decky entrypoint and
+  cover loading when the plugin root is absent from Python's initial module
+  search path. (`DIST-004`)
 
 ## 7. Developer skills
 
