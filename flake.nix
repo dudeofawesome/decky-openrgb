@@ -6,6 +6,8 @@
   outputs =
     { nixpkgs, ... }:
     let
+      lib = nixpkgs.lib;
+
       supportedSystems = [
         "aarch64-darwin"
         "aarch64-linux"
@@ -34,5 +36,11 @@
           default = decky-openrgb;
         }
       );
+
+      nixosModules.default = {
+        imports = [
+          ./modules/decky-openrgb.nix
+        ];
+      };
     };
 }
