@@ -14,17 +14,15 @@ The project exposes reproducible devenv and standard Nix flake package and modul
 4. The build validates the output layout before publishing it.
 5. The Python entrypoint must resolve the packaged `py_modules` directory relative to `main.py` when Decky loads the entrypoint directly, without relying on the plugin directory being the process working directory or already present on Python's module search path.
 6. The root flake must expose the same unpacked plugin derivation as `packages.<system>.decky-openrgb` and as the default package so another flake can consume it without importing project-internal Nix files.
+7. The package must declare OpenRGB in `passthru.runtimeDependencies` so consumers can provide the executable in the environment that loads the plugin.
 
 ### Module
 
 1. Expose the module in `nixosModules`.
 2. Add `jovian.decky-loader.modules.openrgb` with:
    - an enable option;
-   - a Decky plugin package option defaulting to `decky-openrgb`;
-   - an OpenRGB executable package option defaulting to `openrgb`.
-3. When enabled, add the selected OpenRGB executable package to the Decky Loader service path.
-4. When disabled, do not install the plugin or modify the Decky Loader service path.
-5. Evaluation must succeed when the module is imported with its required parent Decky Loader module.
+   - a Decky plugin package option defaulting to `decky-openrgb`.
+3. Evaluation must succeed when the module is imported with its required parent Decky Loader module.
 
 ## Acceptance Criteria
 
@@ -40,8 +38,7 @@ The project exposes reproducible devenv and standard Nix flake package and modul
 - **DIST-005:** `nix build .#decky-openrgb` and `nix build .` select the plugin
   package, and evaluating the root flake exposes both package attributes for
   supported Linux NixOS systems.
+- **DIST-006:** The plugin package exposes OpenRGB through its `runtimeDependencies` passthru attribute.
 - **NIXOS-001:** Evaluating the flake exposes `nixosModules.default` as a valid NixOS module.
 - **NIXOS-002:** With the OpenRGB module disabled, the Decky OpenRGB plugin is absent from `jovian.decky-loader.plugins` and OpenRGB is not added to the Decky Loader service path.
-- **NIXOS-003:** Enabling the module adds the configured OpenRGB executable
-  package to `systemd.services.decky-loader.path`.
 - **NIXOS-004:** The enabled configuration evaluates without option type errors.

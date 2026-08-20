@@ -15,9 +15,6 @@ in
       package = lib.mkPackageOption pkgs "decky-openrgb" {
         default = [ "decky-openrgb" ];
       };
-      openrgbPackage = lib.mkPackageOption pkgs "openrgb" {
-        default = [ "openrgb" ];
-      };
     };
   };
 
@@ -26,8 +23,5 @@ in
       cfg = config.jovian.decky-loader;
     in
     lib.mkIf (has_jovian && cfg.enable) {
-      systemd.services.decky-loader.path = lib.mkIf (cfg.modules.openrgb.enable) [
-        cfg.modules.openrgb.openrgbPackage
-      ];
     };
 }

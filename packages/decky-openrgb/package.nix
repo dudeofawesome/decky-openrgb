@@ -30,6 +30,10 @@ pkgs.stdenvNoCC.mkDerivation {
   inherit pname source version;
   src = source;
 
+  passthru.runtimeDependencies = [
+    pkgs.openrgb
+  ];
+
   pnpmDeps = pkgs.fetchPnpmDeps {
     inherit pname version;
     src = source;
