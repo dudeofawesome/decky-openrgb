@@ -57,6 +57,8 @@ is complete only when its associated automated tests pass.
       `UI-004`, `UI-007`)
 - [x] Implement notification policy: toast failures only and always update
       inline final state. (`UI-009`)
+- [x] Use the Decky below-row button layout for Quick Access actions so their
+      highlighted bounds remain inside the sidebar. (`UI-010`)
 
 ## 5. Automated tests
 
@@ -82,6 +84,8 @@ is complete only when its associated automated tests pass.
 - [x] Test frontend loading, ready, applying, empty and error rendering; control
       enablement; route lifecycle; selected versus Last applied labels; and exact
       toast behavior. (`UI-005`, `UI-007` through `UI-009`)
+- [x] Test that Quick Access actions use the below-row button layout required to
+      prevent highlighted controls from overflowing the sidebar. (`UI-010`)
 - [x] Run the complete automated suite and confirm every acceptance criterion
       above has a passing test before marking implementation complete.
 

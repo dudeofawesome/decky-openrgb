@@ -40,13 +40,15 @@ vi.mock("@decky/ui", () => ({
   ButtonItem: ({
     children,
     disabled,
+    layout,
     onClick,
   }: {
     children: ReactNode;
     disabled?: boolean;
+    layout?: string;
     onClick?: () => void;
   }) => (
-    <button disabled={disabled} onClick={onClick}>
+    <button data-layout={layout} disabled={disabled} onClick={onClick}>
       {children}
     </button>
   ),
@@ -202,6 +204,16 @@ describe("Quick Access states", () => {
     expect(mocks.applyManual).toHaveBeenCalledOnce();
     fireEvent.click(screen.getByRole("button", { name: "Settings" }));
     expect(mocks.navigate).toHaveBeenCalledWith(SETTINGS_ROUTE);
+  });
+
+  it("keeps highlighted actions within the sidebar button row", () => {
+    render(<QuickAccess />);
+
+    for (const name of ["Apply", "Refresh", "Settings"]) {
+      expect(screen.getByRole("button", { name }).getAttribute("data-layout")).toBe(
+        "below",
+      );
+    }
   });
 
   it("distinguishes empty discovery from errors and disables unavailable controls", () => {

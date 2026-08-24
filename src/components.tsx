@@ -46,7 +46,12 @@ export function QuickAccess() {
         </PanelSectionRow>
         {view.operationError ? (
           <PanelSectionRow>
-            <ButtonItem onClick={() => void controller.initialize()}>Retry</ButtonItem>
+            <ButtonItem
+              layout="below"
+              onClick={() => void controller.initialize()}
+            >
+              Retry
+            </ButtonItem>
           </PanelSectionRow>
         ) : null}
         <SettingsButton />
@@ -98,13 +103,18 @@ export function QuickAccess() {
         <PanelSectionRow>
           <ButtonItem
             disabled={unavailable || !selectedAvailable}
+            layout="below"
             onClick={() => void controller.applyManual()}
           >
             {view.busy === "applying" ? "Applying…" : "Apply"}
           </ButtonItem>
         </PanelSectionRow>
         <PanelSectionRow>
-          <ButtonItem disabled={unavailable} onClick={() => void controller.refresh()}>
+          <ButtonItem
+            disabled={unavailable}
+            layout="below"
+            onClick={() => void controller.refresh()}
+          >
             {view.busy === "refreshing" ? "Refreshing…" : "Refresh"}
           </ButtonItem>
         </PanelSectionRow>
@@ -147,6 +157,7 @@ function SettingsButton() {
   return (
     <PanelSectionRow>
       <ButtonItem
+        layout="below"
         onClick={() => {
           Navigation.Navigate(SETTINGS_ROUTE);
           Navigation.CloseSideMenus();
